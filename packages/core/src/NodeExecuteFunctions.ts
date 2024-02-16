@@ -142,6 +142,7 @@ import {
 	getWorkflowExecutionMetadata,
 	setAllWorkflowExecutionMetadata,
 	setWorkflowExecutionMetadata,
+	setWorkflowDeleteExecution,
 } from './ExecutionMetadata';
 import { getSecretsProxy } from './Secrets';
 import Container from 'typedi';
@@ -1911,6 +1912,9 @@ export function getAdditionalKeys(
 						},
 						getAll(): Record<string, string> {
 							return getAllWorkflowExecutionMetadata(runExecutionData);
+						},
+						setDeleteExecution(isDelete: boolean): void {
+							setWorkflowDeleteExecution(runExecutionData, isDelete);
 						},
 				  }
 				: undefined,

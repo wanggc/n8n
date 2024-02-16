@@ -1891,6 +1891,7 @@ export interface IRunExecutionData {
 		pinData?: IPinData;
 		lastNodeExecuted?: string;
 		metadata?: Record<string, string>;
+		deleteExecution?: boolean;
 	};
 	executionData?: {
 		contextData: IExecuteContextData;

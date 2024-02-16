@@ -72,3 +72,10 @@ export function getWorkflowExecutionMetadata(
 ): string {
 	return getAllWorkflowExecutionMetadata(executionData)[String(key).slice(0, 50)];
 }
+
+export function setWorkflowDeleteExecution(
+	executionData: IRunExecutionData,
+	isDelete: boolean,
+): void {
+	executionData.resultData.deleteExecution = isDelete;
+}

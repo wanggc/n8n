@@ -34,6 +34,7 @@ import { License } from '@/License';
 import { EventsService } from '@/services/events.service';
 import { NodeTypes } from '@/NodeTypes';
 import { Telemetry } from '@/telemetry';
+import { ExecutionRepository } from '@db/repositories/execution.repository';
 
 function userToPayload(user: User): {
 	userId: string;
@@ -58,6 +59,7 @@ export class InternalHooks {
 		private readonly nodeTypes: NodeTypes,
 		private readonly sharedWorkflowRepository: SharedWorkflowRepository,
 		private readonly workflowRepository: WorkflowRepository,
+		private readonly executionRepository: ExecutionRepository,
 		eventsService: EventsService,
 		private readonly instanceSettings: InstanceSettings,
 		private readonly eventBus: MessageEventBus,
@@ -500,6 +502,10 @@ export class InternalHooks {
 						},
 				  }),
 		);
+
+		if (telemetryProperties.success && runData.data.resultData.deleteExecution) {
+			promises.push(this.executionRepository.delete(executionId));
+		}
 
 		void Promise.all([...promises, this.telemetry.trackWorkflowExecution(telemetryProperties)]);
 	}
