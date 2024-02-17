@@ -24,6 +24,7 @@ describe('InternalHooks', () => {
 		mock(),
 		mock(),
 		mock(),
+		mock(),
 		license,
 	);
 

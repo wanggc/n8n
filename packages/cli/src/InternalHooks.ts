@@ -503,7 +503,7 @@ export class InternalHooks {
 				  }),
 		);
 
-		if (telemetryProperties.success && runData.data.resultData.deleteExecution) {
+		if (telemetryProperties.success && runData?.data.resultData.deleteExecution) {
 			promises.push(this.executionRepository.delete(executionId));
 		}
 
